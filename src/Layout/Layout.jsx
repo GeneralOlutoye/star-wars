@@ -1,20 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import React from 'react'
 import { BiMoviePlay } from 'react-icons/bi'
 import { Menu } from 'antd';
 import Logo from "../images/starwarsimg.png"
 import { useLayoutEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-export const Layout = ({ pageKey, pageTitle, pageUrl, tabName }) => {
-    const [menuItems, setMenuItems] = useState([])
-    const FetchMovie = async () => {
-        const response = await axios.get('https://swapi.dev/api/films')
-            .then(res => setMenuItems(res.data?.results))
-            .catch(error => console.log(error))
-        return response?.data
-    }
+export const Layout = (props) => {
 
     function getItem(label, key, icon, children, type) {
         return {
@@ -26,19 +18,50 @@ export const Layout = ({ pageKey, pageTitle, pageUrl, tabName }) => {
         };
     }
 
+    const menuItem = [
+        {
+            key: '2',
+            url: '/a-new-hope',
+            name: 'A New Hope'
+        },
+        {
+            key: '3',
+            url: '/empire-strikes-back',
+            name: 'The Empire Strikes Back'
+        },
+        {
+            key: '4',
+            url: '/return-of-the-jedi',
+            name: 'Return of the Jedi'
+        },
+        {
+            key: '5',
+            url: '/phantom-menace',
+            name: 'The Phantom Menace'
+        },
+        {
+            key: '6',
+            url: '/attack-of-the-clones',
+            name: 'Attack of the Clones'
+        },
+        {
+            key: '7',
+            url: '/revenge-of-the-sith',
+            name: 'Revenge of the Sith'
+        },
+    ]
+
+
     const items = [
         getItem('Movie List', '1', <BiMoviePlay />,
-            menuItems.map((menu, index) => (
-                getItem(<Link to={pageUrl}>{menu.title}</Link>, index +2)
-            )))
+            menuItem.map((menu) => (
+                getItem(<NavLink to={menu.url}>{menu.name}</NavLink>, menu.key)
+            ))
+        )
     ];
 
-    useEffect(() => {
-        FetchMovie()
-    }, [])
-
     useLayoutEffect(() => {
-        document.title = tabName
+        document.title = props.tabName
     }, [])
 
     return (
@@ -49,13 +72,14 @@ export const Layout = ({ pageKey, pageTitle, pageUrl, tabName }) => {
                     mode="inline"
                     items={items}
                     defaultOpenKeys={['1']}
-                    defaultSelectedKeys={pageKey}
+                    defaultSelectedKeys={props.pageKey}
                 />
             </div>
             <div>
                 <header className='w-full shadow-md h-[4rem] flex justify-between items-center'>
-                    <h1 className='font-bold text-lg ml-5'>{pageTitle}</h1>
+                    <h1 className='font-bold text-lg m-auto text-blue-600'>{props.pageTitle}</h1>
                 </header>
+                <main className='m-[3rem]'>{props.children}</main>
             </div>
         </div>
     )
