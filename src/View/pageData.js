@@ -2,7 +2,7 @@ export const PageDatas = [
     {
         pageKey: '2',
         pageTitle: 'A New Hope',
-        pageUrl: '/a-new-hope',
+        pageUrl: '/',
         movieId: '1'
     },
     {

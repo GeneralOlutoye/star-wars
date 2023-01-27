@@ -32,7 +32,7 @@ export const Layout = (props) => {
     const menuItem = [
         {
             key: '2',
-            url: '/a-new-hope',
+            url: '/',
             name: 'A New Hope'
         },
         {
