@@ -1,12 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { BiMoviePlay } from 'react-icons/bi'
-import { Menu } from 'antd';
+import { BsMenuButtonWide } from 'react-icons/bs'
+import { Drawer, Menu } from 'antd';
 import Logo from "../images/starwarsimg.png"
 import { useLayoutEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 export const Layout = (props) => {
+    const [open, setOpen] = useState(false);
+
+    const showDrawer = () => {
+      setOpen(true);
+    };
+  
+    const onClose = () => {
+      setOpen(false);
+    };
 
     function getItem(label, key, icon, children, type) {
         return {
@@ -65,8 +76,8 @@ export const Layout = (props) => {
     }, [])
 
     return (
-        <div className='h-screen grid grid-cols-[15rem_1fr]'>
-            <div className='h-screen shadow-md'>
+        <div className='h-screen grid grid-cols-1 lg:grid-cols-[15rem_1fr]'>
+            <div className='h-screen shadow-md hidden lg:block overflow-auto'>
                 <img src={Logo} alt="Logo" className='w-36 my-10 mx-auto' />
                 <Menu
                     mode="inline"
@@ -75,11 +86,20 @@ export const Layout = (props) => {
                     defaultSelectedKeys={props.pageKey}
                 />
             </div>
-            <div>
-                <header className='w-full shadow-md h-[4rem] flex justify-between items-center'>
-                    <h1 className='font-bold text-lg m-auto text-blue-600'>{props.pageTitle}</h1>
+            <Drawer placement="right" onClose={onClose} open={open} width={'70%'}>
+                <Menu
+                    mode="inline"
+                    items={items}
+                    defaultOpenKeys={['1']}
+                    defaultSelectedKeys={props.pageKey}
+                />
+            </Drawer>
+            <div className='overflow-auto'>
+                <header className='w-full shadow-md h-[4rem] flex justify-between items-center px-5 lg:px-0'>
+                    <h1 className='font-bold text-lg lg:m-auto text-blue-600'>{props.pageTitle}</h1>
+                    <BsMenuButtonWide onClick={showDrawer} className='block lg:hidden text-xl' />
                 </header>
-                <main className='m-[3rem]'>{props.children}</main>
+                <main className='m-[1rem] lg:m-[2rem] h-full'>{props.children}</main>
             </div>
         </div>
     )
