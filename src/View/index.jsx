@@ -26,7 +26,7 @@ export const PageComponent = ({ movieId }) => {
     const [comment, setComment] = useState("");
 
     return (
-        <Spin tip="processing" spinning={loading} className='h-full'>
+        <Spin tip="processing" spinning={loading}>
             <div className="leading-loose text-lg text-justify">{data?.opening_crawl}</div>
             {!loading && (
                 <TextArea

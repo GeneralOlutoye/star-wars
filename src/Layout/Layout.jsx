@@ -99,7 +99,7 @@ export const Layout = (props) => {
                     <h1 className='font-bold text-lg lg:m-auto text-blue-600'>{props.pageTitle}</h1>
                     <BsMenuButtonWide onClick={showDrawer} className='block lg:hidden text-xl' />
                 </header>
-                <main className='m-[1rem] lg:m-[2rem] h-full'>{props.children}</main>
+                <main className='m-[1rem] lg:m-[2rem]'>{props.children}</main>
             </div>
         </div>
     )
