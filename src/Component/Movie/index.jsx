@@ -95,8 +95,8 @@ export const MovieDetails = () => {
         <div className="my-2 text-left">
           {(
             <>
-              <h1>Name: {commentData.name}</h1>
-              <p>{commentData.comment}</p>
+              <h1>Name: {commentData?.name}</h1>
+              <p>{commentData?.comment}</p>
             </>
           )}
         </div>
