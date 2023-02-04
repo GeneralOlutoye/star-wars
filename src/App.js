@@ -1,20 +1,15 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { PageDatas } from "./View/pageData";
-import { PageView } from "./View/view";
+import { Home } from "./Component/HomePage";
+import { MovieDetails } from "./Component/Movie";
 
-export const App = () => {
+export const App = (x) => {
   return (
     <BrowserRouter>
       <Routes>
-        {PageDatas.map((x) => (
-          <Route
-            key={x.pageKey}
-            path={x.pageUrl}
-            element={<PageView pageData={x} />}
-          />
-        ))}
+        <Route path="/" element={<Home />} />
+        <Route path="/movie-details/:id" element={<MovieDetails />} />
       </Routes>
     </BrowserRouter>
   );
