@@ -93,12 +93,8 @@ export const MovieDetails = () => {
           </form>
         </div>
         <div className="my-2 text-left">
-          {(
-            <>
               <h1>Name: {commentData?.name}</h1>
               <p>{commentData?.comment}</p>
-            </>
-          )}
         </div>
       </Spin>
     </Layout2>
