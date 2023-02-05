@@ -12,7 +12,9 @@ export const MovieDetails = () => {
     name: "",
     comment: "",
   });
-  const [commentData, setCommentData] = useState(localStorage.getItem('comment'));
+  const [commentData, setCommentData] = useState(
+    localStorage.getItem("comment")
+  );
 
   const url = window.location.href;
   const urlId = url.split("/");
@@ -93,8 +95,10 @@ export const MovieDetails = () => {
           </form>
         </div>
         <div className="my-2 text-left">
-              <h1>Name: {commentData?.name}</h1>
-              <p>{commentData?.comment}</p>
+          <h1 className="font-bold my-2">Comments</h1>
+          <p>
+            {commentData?.comment} <br /> Comment By: {commentData?.name}
+          </p>
         </div>
       </Spin>
     </Layout2>
