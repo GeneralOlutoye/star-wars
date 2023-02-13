@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const Characters = ({ character }) => {
   const [data, setData] = useState([]);
@@ -9,16 +9,19 @@ export const Characters = ({ character }) => {
   const fetchCharacter = () => {
     character?.characters?.map(async (characterAPI) => {
       const response = await axios.get(characterAPI.toString());
-      setData(response?.data);
-      return response?.data
+      setData(response?.data?.name);
+      return response?.data?.name
     });
   };
   
   useEffect(() => {
     fetchCharacter();
   }, [character]);
-  return <div className="text-left">
-    <h1 className="font-medium">Characters</h1>
-    <h2> <b>Name:</b> {data?.name} <b>Height:</b> {data?.height} <b>Skin color:</b> {data?.skin_color}</h2>
-  </div>
+
+  return (
+    <div className="text-left">
+      <h1 className="font-bold">Character List</h1>
+      {data}
+    </div>
+  );
 };
